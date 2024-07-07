@@ -1,15 +1,9 @@
-import {
-  useAuth,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { useAuth, SignInButton } from "@clerk/clerk-react";
 import UsernameMenu from "./UsernameMenu";
 import { Button } from "./ui/button";
 
 const MainNav = () => {
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isLoaded, userId } = useAuth();
   if (!isLoaded) {
     return null;
   }
