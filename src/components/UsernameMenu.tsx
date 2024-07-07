@@ -5,11 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import {
-  useAuth,
-  SignedOut,
-  SignInButton,
   SignOutButton,
-  UserButton,
 } from "@clerk/clerk-react";
 
 import { CircleUserRound } from "lucide-react";
