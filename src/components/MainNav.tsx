@@ -6,32 +6,38 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import UsernameMenu from "./UsernameMenu";
-
+import { Button } from "./ui/button";
 
 const MainNav = () => {
-  const {isLoaded, userId, sessionId, getToken} = useAuth();
-  if (!isLoaded){
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  if (!isLoaded) {
     return null;
   }
 
   // Check if user has login
   if (userId) {
-    return <UsernameMenu />
+    return <UsernameMenu />;
   } else {
     return (
-    <header>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
-    )
+      <header>
+        {/* <SignedIn>
+          
+        </SignedIn> */}
+        <SignInButton>
+          <Button
+            variant="ghost"
+            className="font-bold hover:text-orange-500 hover:bg-white"
+          >
+            Login
+          </Button>
+        </SignInButton>
+      </header>
+    );
   }
- 
-    
-/* <SignedOut>
+
+  /* <SignedOut>
         <SignInButton />
       </SignedOut> */
-  
 };
 
 export default MainNav;
