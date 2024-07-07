@@ -3,3 +3,5 @@
 - Tailwind, Shadcn UI
 - Vite
 - Yarn
+## Optimization
+- Vite
