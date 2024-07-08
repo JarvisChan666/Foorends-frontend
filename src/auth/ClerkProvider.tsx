@@ -23,7 +23,7 @@ const ClerkProviderwithNavigate = ({ children }: Props) => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} >
         <UserCreationHandler>{children}</UserCreationHandler>
       </ClerkProvider>
     </Suspense>
@@ -33,7 +33,7 @@ const ClerkProviderwithNavigate = ({ children }: Props) => {
 const UserCreationHandler = ({ children }: Props) => {
   const { isLoaded, userId } = useAuth();
   const { user } = useUser();
-  // const [isUserCreated, setIsUserCreated] = useState(false);
+
   const isUserCreated = useRef(false);
   const { createUser } = useCreateMyUser();
   const userEmail = user?.emailAddresses[0].emailAddress;
@@ -45,12 +45,11 @@ const UserCreationHandler = ({ children }: Props) => {
         clerkId: userId,
         email: user.emailAddresses[0].emailAddress,
       })
-        // .then(() => setIsUserCreated(true))
         .then(() => {
           isUserCreated.current = true;
+          navigate("/auth-callback");
         })
         .catch((err) => console.error(err));
-      navigate("/auth-callback");
     }
   }, [isLoaded, userId, user, createUser, isUserCreated]);
 

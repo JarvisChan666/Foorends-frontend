@@ -1,6 +1,7 @@
 import { useMutation } from "react-query";
 
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth} from '@clerk/clerk-react';
+
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -25,6 +26,7 @@ export const useCreateMyUser = () => {
     });
 
     if (!response.ok) {
+      console.log(response);
       throw new Error("Failed to create user");
     }
   };
