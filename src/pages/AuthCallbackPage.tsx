@@ -2,7 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useCreateMyUser } from "../../api/MyUserApi";
 
 import { useEffect, useRef} from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AuthCallbackPage = () => {
   const { user } = useUser();
@@ -10,7 +10,7 @@ const AuthCallbackPage = () => {
   const isUserCreated = useRef(false);
   const { createUser } = useCreateMyUser();
   const userEmail = user?.emailAddresses[0].emailAddress;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Run only once
   useEffect(() => {
@@ -26,6 +26,7 @@ const AuthCallbackPage = () => {
         })
         .catch((err) => console.error(err));
     }
+    navigate('/');
   }, [userId, user, createUser, isUserCreated]);
 
   return <>Loading...</>;

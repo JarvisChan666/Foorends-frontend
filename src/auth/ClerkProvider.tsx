@@ -1,6 +1,8 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useCreateMyUser } from "../../api/MyUserApi";
 import { useEffect, useRef, Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
+
 const ClerkProvider = lazy(() =>
   import("@clerk/clerk-react").then((module) => ({
     default: module.ClerkProvider,
@@ -35,6 +37,7 @@ const UserCreationHandler = ({ children }: Props) => {
   const isUserCreated = useRef(false);
   const { createUser } = useCreateMyUser();
   const userEmail = user?.emailAddresses[0].emailAddress;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoaded && userId && userEmail && !isUserCreated.current) {
@@ -47,7 +50,7 @@ const UserCreationHandler = ({ children }: Props) => {
           isUserCreated.current = true;
         })
         .catch((err) => console.error(err));
-      // navigate("/auth-callback");
+      navigate("/auth-callback");
     }
   }, [isLoaded, userId, user, createUser, isUserCreated]);
 
